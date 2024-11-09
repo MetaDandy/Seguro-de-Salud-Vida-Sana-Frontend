@@ -16,6 +16,7 @@ import { SubmitButtonComponent } from '../Components/submit-button/submit-button
 import { LoginDto, loginSchema } from './login.dto';
 import { LoginService } from './login.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     CustomInputComponent,
     SubmitButtonComponent,
     HttpClientModule,
+    ToastrModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -58,7 +60,11 @@ export default class LoginComponent {
     return this.loginForm.get('password') as FormControl;
   }
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private toastr: ToastrService
+  ) {
     this.loginForm = this.fb.group<LoginForm>({
       email: this.fb.control('', [Validators.required, Validators.email]),
       password: this.fb.control('', Validators.required),
@@ -77,9 +83,11 @@ export default class LoginComponent {
       this.loginService.login(loginData).subscribe({
         next: (response) => {
           console.log('Login successful', response);
+          this.toastr.success('Login exitoso', 'Exito');
         },
         error: (error) => {
           console.log('Login failed', error);
+          this.toastr.error('Error en el login', 'Error');
         },
       });
     } catch (error) {

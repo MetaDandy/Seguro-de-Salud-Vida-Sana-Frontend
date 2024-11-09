@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { LoginDto, LoginResponse, LoginResponseSchema } from './login.dto';
 import { environment } from '../../enviroments/enviroment';
+import { Jwt } from '../Services/jwt';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { environment } from '../../enviroments/enviroment';
 export class LoginService {
   private api: string = environment.apiurl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private jwt: Jwt) {}
 
   login(login: LoginDto): Observable<LoginResponse> {
     return this.http.post<any>(`${this.api}/login/admin`, login).pipe(
@@ -23,6 +24,11 @@ export class LoginService {
           );
 
         localStorage.setItem('token', result.data.token);
+
+        const decode = this.jwt.decodeToken(result.data.token);
+
+        console.log(decode);
+
         return result.data;
       })
     );
