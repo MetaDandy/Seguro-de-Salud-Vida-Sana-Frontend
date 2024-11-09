@@ -17,6 +17,7 @@ import { LoginDto, loginSchema } from './login.dto';
 import { LoginService } from './login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
+import { Auth } from '../Services/Auth';
 
 @Component({
   selector: 'app-login',
@@ -63,7 +64,8 @@ export default class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: Auth
   ) {
     this.loginForm = this.fb.group<LoginForm>({
       email: this.fb.control('', [Validators.required, Validators.email]),
@@ -83,6 +85,7 @@ export default class LoginComponent {
       this.loginService.login(loginData).subscribe({
         next: (response) => {
           console.log('Login successful', response);
+          this.authService.redirectByRole();
           this.toastr.success('Login exitoso', 'Exito');
         },
         error: (error) => {
