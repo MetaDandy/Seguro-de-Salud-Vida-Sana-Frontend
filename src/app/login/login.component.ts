@@ -69,12 +69,12 @@ export default class LoginComponent {
     try {
       loginSchema.parse(this.loginForm.value);
       const { email, password } = this.loginForm.value;
-      const Logiin: LoginDto = {
+      const loginData: LoginDto = {
         email: email ?? '',
         password: password ?? '',
       };
 
-      this.loginService.login(Logiin).subscribe({
+      this.loginService.login(loginData).subscribe({
         next: (response) => {
           console.log('Login successful', response);
         },
@@ -82,12 +82,8 @@ export default class LoginComponent {
           console.log('Login failed', error);
         },
       });
-    } catch (error) {}
-    if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-
-      console.log(email);
-      console.log(password);
+    } catch (error) {
+      console.log(error);
     }
   }
 }

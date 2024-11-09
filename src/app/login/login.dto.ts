@@ -9,3 +9,13 @@ export const loginSchema = z.object({
 });
 
 export type LoginDto = z.infer<typeof loginSchema>;
+
+export const LoginResponseSchema = z.object({
+  expirationTime: z.string(),
+  message: z.string(),
+  status: z.number(),
+  timestamp: z.string(),
+  token: z.string(),
+});
+
+export type LoginResponse = z.infer<typeof LoginResponseSchema>;
