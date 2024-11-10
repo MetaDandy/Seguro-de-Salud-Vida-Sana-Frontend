@@ -28,7 +28,6 @@ export class LogoutService {
             localStorage.removeItem('sub');
             localStorage.removeItem('iat');
             localStorage.removeItem('exp');
-            localStorage.removeItem('fichasAtendidas');
             localStorage.removeItem('ci'); // Si almacenas otros datos, elimínalos también
             // Redirigir al usuario a la pantalla de login
             this.router.navigate(['/login']);

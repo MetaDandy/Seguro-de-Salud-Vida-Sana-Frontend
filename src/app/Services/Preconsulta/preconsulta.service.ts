@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import {
   CreatePreconsulta,
   createPreconsultaSchema,
+  GetAllPreconsulta,
+  getAllPreconsultaSchema,
   GetByIdPreconsulta,
   getByIdPreconsultaSchema,
 } from './preconsulta.dto';
@@ -38,6 +40,21 @@ export class PreconsultaService {
               'La respuesta del servidor no tiene el formato esperado'
             );
 
+          return result.data;
+        })
+      );
+  }
+
+  getAllPreconsulta(): Observable<GetAllPreconsulta> {
+    return this.http
+      .get<GetAllPreconsulta>(`${this.url}/preconsulta/getAll`)
+      .pipe(
+        map((response) => {
+          const result = getAllPreconsultaSchema.safeParse(response);
+          if (!result.success)
+            throw new Error(
+              'La respuesta del servidor no tiene el formato esperado'
+            );
           return result.data;
         })
       );

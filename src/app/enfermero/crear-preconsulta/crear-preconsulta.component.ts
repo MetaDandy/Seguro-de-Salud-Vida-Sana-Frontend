@@ -139,11 +139,19 @@ export class CrearPreconsultaComponent {
 
   loadTodayFichas() {
     const today = this.fechaService.obtenerFechaLocal(); // Obtener la fecha actual
+    const fichasAtendidas = JSON.parse(
+      localStorage.getItem('fichasAtendidas') || '[]'
+    );
+
     this.fichaService.getAllFicha().subscribe({
       next: (response) => {
         this.options = response.fichaList
-          //.filter((ficha) => ficha.fechaAtencion === today) // Filtrar por fecha actual
           //quitar el comentario por el filter cuando no sea finde
+          .filter(
+            (ficha) =>
+              //ficha.fechaAtencion === today &&
+              !fichasAtendidas.includes(ficha.id)
+          )
           .map((ficha) => ({
             value: ficha.id,
             label: `${ficha.nombrePaciente} - ${ficha.horaAtencion} - ${ficha.fechaAtencion}`,
@@ -189,6 +197,14 @@ export class CrearPreconsultaComponent {
         });
         console.log(response);
         //todo: usar el navigate
+        const fichasAtendidas = JSON.parse(
+          localStorage.getItem('fichasAtendidas') || '[]'
+        );
+        fichasAtendidas.push(formData.id_Ficha);
+        localStorage.setItem(
+          'fichasAtendidas',
+          JSON.stringify(fichasAtendidas)
+        );
       },
       error: (err) => {
         this.snackBar.open('Error al crear la ficha', 'Cerrar', {

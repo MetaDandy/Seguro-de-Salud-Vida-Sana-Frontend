@@ -47,3 +47,12 @@ export const getByIdPreconsultaSchema = z.object({
 });
 
 export type GetByIdPreconsulta = z.infer<typeof getByIdPreconsultaSchema>;
+
+export const getAllPreconsultaSchema = z.object({
+  status: z.number(),
+  message: z.string(),
+  timestamp: z.string(),
+  preconsultaList: z.array(preconsultaSchema),
+});
+
+export type GetAllPreconsulta = z.infer<typeof getAllPreconsultaSchema>;
