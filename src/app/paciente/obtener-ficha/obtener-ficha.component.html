@@ -1,0 +1,46 @@
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Seleccionar Horario Médico</h2>
+
+  <!-- Lista de médicos y horarios -->
+  <div *ngFor="let item of horariosMedicos.horarioMedicoList" class="mb-6">
+    <mat-card class="mb-4">
+      <mat-card-header>
+        <mat-card-title
+          >{{ item.nombreMedico }} -
+          {{ item.nombreEspecialidad }}</mat-card-title
+        >
+      </mat-card-header>
+      <mat-card-content>
+        <div
+          *ngFor="let horario of item.horarios"
+          class="flex items-center mt-2"
+        >
+          <!-- Radio button para seleccionar horario -->
+          <mat-radio-group [(ngModel)]="selectedHorario" class="flex flex-col">
+            <!-- Genera un valor único para cada horario -->
+            <mat-radio-button
+              [value]="getUniqueHorarioId(item, horario)"
+              [id]="'horario-' + item.ci_medico + '-' + horario.id"
+              class="mb-2"
+            >
+              {{ horario.dia }}: {{ horario.horaInicio }} -
+              {{ horario.horaFin }}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Botón para confirmar la selección -->
+  <div *ngIf="selectedHorario" class="mt-4">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="confirmarSeleccion()"
+      class="w-full"
+    >
+      Confirmar Selección
+    </button>
+  </div>
+</div>

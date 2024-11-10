@@ -7,6 +7,7 @@ const tokenSchema = z.object({
   roles: z.array(z.string()),
   iat: z.number(),
   exp: z.number(),
+  ci: z.number(),
 });
 
 type tokenDto = z.infer<typeof tokenSchema>;
@@ -31,6 +32,7 @@ export class Jwt {
       localStorage.setItem('roles', decodedToken.roles[0] ?? '');
       localStorage.setItem('iat', decodedToken.iat?.toString() ?? '');
       localStorage.setItem('exp', decodedToken.exp?.toString() ?? '');
+      localStorage.setItem('ci', decodedToken.ci?.toString() ?? '');
 
       return decodedToken;
     } catch (error) {

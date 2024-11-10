@@ -1,0 +1,33 @@
+<div class="flex h-screen bg-gray-100">
+  <mat-sidenav-container class="flex-1">
+    <mat-sidenav #sidenav mode="side" class="w-64">
+      <mat-toolbar>Menu</mat-toolbar>
+      <mat-nav-list>
+        <a
+          *ngFor="let item of menuItems"
+          mat-list-item
+          [routerLink]="item.route"
+          class="hover:bg-gray-200 transition-colors duration-200"
+          (click)="sidenav.close()"
+        >
+          {{ item.label }}
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="flex flex-col h-full">
+      <mat-toolbar class="flex justify-between">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Seguro de salud vida sana</span>
+        <button mat-icon-button aria-label="User settings">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </mat-toolbar>
+      <div class="p-4 flex-1">
+        <router-outlet />
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
