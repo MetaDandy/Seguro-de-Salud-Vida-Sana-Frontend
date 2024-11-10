@@ -1,0 +1,61 @@
+<form [formGroup]="form" (ngSubmit)="submitPreconsulta()">
+  <div class="space-y-6">
+    <!-- Selector de Ficha -->
+    <div class="flex flex-col md:flex-row gap-4">
+      <app-custom-select
+        [options]="options"
+        placeholder="Selecciona una ficha"
+        (selectionChange)="handleSelectionChange($event)"
+        class="flex-1"
+      ></app-custom-select>
+    </div>
+
+    <!-- Campos de entrada -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-custom-input
+        [config]="estadoConfig"
+        [control]="estadoControl"
+        class="w-full"
+      ></app-custom-input>
+
+      <app-custom-input
+        [config]="pesoConfig"
+        [control]="pesoControl"
+        class="w-full"
+      ></app-custom-input>
+
+      <app-custom-input
+        [config]="alturaConfig"
+        [control]="alturaControl"
+        class="w-full"
+      ></app-custom-input>
+
+      <app-custom-input
+        [config]="edadConfig"
+        [control]="edadControl"
+        class="w-full"
+      ></app-custom-input>
+
+      <app-custom-input
+        [config]="sexoConfig"
+        [control]="sexoControl"
+        class="w-full"
+      ></app-custom-input>
+
+      <app-custom-input
+        [config]="presionConfig"
+        [control]="presionControl"
+        class="w-full"
+      ></app-custom-input>
+    </div>
+
+    <!-- Botón de submit -->
+    <div class="flex justify-center">
+      <app-submit-button
+        class="w-full md:w-auto"
+        [label]="'Crear Preconsulta'"
+        [disabled]="form.invalid"
+      />
+    </div>
+  </div>
+</form>

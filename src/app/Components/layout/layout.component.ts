@@ -6,6 +6,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { LogoutService } from './logout.service';
 
 interface MenuItem {
   label: string;
@@ -32,6 +33,14 @@ interface MenuItem {
 export class LayoutComponent {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
   @Input() menuItems: MenuItem[] = [];
+
+  constructor(private logoutService: LogoutService) {}
+
+  logout() {
+    console.log('loggin out');
+
+    this.logoutService.logout();
+  }
 
   toggleSidenav() {
     this.sidenav.toggle();
