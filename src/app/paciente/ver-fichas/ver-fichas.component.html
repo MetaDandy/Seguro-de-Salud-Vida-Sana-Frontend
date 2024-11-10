@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Fichas Futuras</h2>
+  <mat-card *ngFor="let ficha of fichasFuturas" class="ficha-card my-2">
+    <mat-card-content>
+      <p><strong>Fecha Atención:</strong> {{ ficha.fechaAtencion }}</p>
+      <p><strong>Hora Atención:</strong> {{ ficha.horaAtencion }}</p>
+      <p><strong>Médico:</strong> {{ ficha.nombreMedico }}</p>
+      <p><strong>Especialidad:</strong> {{ ficha.nombreEspecialidad }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <h2>Fichas Pasadas</h2>
+  <mat-card *ngFor="let ficha of fichasPasadas" class="ficha-card my-2">
+    <mat-card-content>
+      <p><strong>Fecha Atención:</strong> {{ ficha.fechaAtencion }}</p>
+      <p><strong>Hora Atención:</strong> {{ ficha.horaAtencion }}</p>
+      <p><strong>Médico:</strong> {{ ficha.nombreMedico }}</p>
+      <p><strong>Especialidad:</strong> {{ ficha.nombreEspecialidad }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

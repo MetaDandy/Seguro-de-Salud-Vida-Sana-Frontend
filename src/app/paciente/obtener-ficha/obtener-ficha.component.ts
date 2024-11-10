@@ -7,6 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { FichaService } from '../../Services/Ficha/ficha.service';
+import { Fecha } from '../../Services/Fecha';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-obtener-ficha',
@@ -30,7 +32,9 @@ export class ObtenerFichaComponent implements OnInit {
   constructor(
     private horarioMedicoService: HorarioMedicoService,
     private snackBar: MatSnackBar,
-    private fichaService: FichaService
+    private fichaService: FichaService,
+    private fecha: Fecha,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,11 +63,11 @@ export class ObtenerFichaComponent implements OnInit {
     const horario = this.findHorarioById(ci_medico, id_horario);
 
     // Calcular la fecha de atención según el día seleccionado
-    const fechaAtencion = this.calcularFechaAtencion(horario.dia);
+    const fechaAtencion = this.fecha.calcularFechaAtencion(horario.dia);
 
     // Crear la ficha
     const ficha = {
-      fechaEmision: this.obtenerFechaLocal(),
+      fechaEmision: this.fecha.obtenerFechaLocal(),
       fechaAtencion: fechaAtencion,
       horaAtencion: horario.horaInicio,
       ci_paciente: Number(this.ci_paciente),
@@ -81,6 +85,7 @@ export class ObtenerFichaComponent implements OnInit {
           duration: 3000,
         });
         console.log(response);
+        this.router.navigate(['/paciente/ver-ficha']);
       },
       error: (err) => {
         this.snackBar.open('Error al crear la ficha', 'Cerrar', {
@@ -106,43 +111,5 @@ export class ObtenerFichaComponent implements OnInit {
     }
     console.error('Horario no encontrado', ci_medico, id_horario);
     return null; // Devuelve null si no se encuentra el horario
-  }
-
-  // Función para calcular la fecha de atención según el día seleccionado
-  calcularFechaAtencion(dia: string): string {
-    const today = new Date();
-    const diasDeLaSemana = [
-      'DOMINGO',
-      'LUNES',
-      'MARTES',
-      'MIERCOLES',
-      'JUEVES',
-      'VIERNES',
-      'SABADO',
-    ];
-    const dayIndex = diasDeLaSemana.indexOf(dia);
-
-    if (dayIndex === -1) return ''; // Si el día no es válido
-
-    const fechaAtencion = new Date(today);
-    fechaAtencion.setDate(
-      today.getDate() + ((dayIndex + 7 - today.getDay()) % 7)
-    ); // Calcula la próxima fecha de ese día
-
-    return this.formatFechaLocal(fechaAtencion); // Formato YYYY-MM-DD
-  }
-
-  // Función para obtener la fecha en formato local (no UTC)
-  obtenerFechaLocal(): string {
-    const today = new Date();
-    return this.formatFechaLocal(today); // Formato YYYY-MM-DD
-  }
-
-  // Formatear la fecha a formato local
-  formatFechaLocal(date: Date): string {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
   }
 }

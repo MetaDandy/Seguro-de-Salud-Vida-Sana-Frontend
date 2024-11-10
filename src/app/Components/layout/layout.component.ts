@@ -27,6 +27,7 @@ interface MenuItem {
     RouterModule,
   ],
   templateUrl: './layout.component.html',
+  styleUrl: './layout.component.css',
 })
 export class LayoutComponent {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;

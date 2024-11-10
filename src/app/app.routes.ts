@@ -4,6 +4,7 @@ import { EnfermeroComponent } from './enfermero/enfermero.component';
 import { MedicoComponent } from './medico/medico.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { ObtenerFichaComponent } from './paciente/obtener-ficha/obtener-ficha.component';
+import { VerFichasComponent } from './paciente/ver-fichas/ver-fichas.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,10 @@ export const routes: Routes = [
       {
         path: 'obtener-ficha',
         component: ObtenerFichaComponent,
+      },
+      {
+        path: 'ver-ficha',
+        component: VerFichasComponent,
       },
     ],
   },

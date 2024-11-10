@@ -5,6 +5,8 @@ import { map, Observable } from 'rxjs';
 import {
   CreateFicha,
   createFichaSchema,
+  GetAllFicha,
+  getAllFichaSchema,
   GetByIdFicha,
   getByIdFichaSchema,
 } from './ficha.dto';
@@ -45,5 +47,19 @@ export class FichaService {
           return result.data;
         })
       );
+  }
+
+  getAllFicha(): Observable<GetAllFicha> {
+    return this.http.get<GetAllFicha>(`${this.url}/ficha/getAll`).pipe(
+      map((response) => {
+        const result = getAllFichaSchema.safeParse(response);
+        if (!result.success)
+          throw new Error(
+            'La respuesta del servidor no tiene el formato esperado'
+          );
+
+        return result.data;
+      })
+    );
   }
 }

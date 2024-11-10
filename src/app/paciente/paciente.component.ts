@@ -10,5 +10,8 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './paciente.component.css',
 })
 export class PacienteComponent {
-  menuItems = [{ label: 'Obtener ficha', route: '/paciente/obtener-ficha' }];
+  menuItems = [
+    { label: 'Obtener ficha', route: '/paciente/obtener-ficha' },
+    { label: 'Ver ficha', route: '/paciente/ver-ficha' },
+  ];
 }

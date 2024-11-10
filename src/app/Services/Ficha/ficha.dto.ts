@@ -40,3 +40,12 @@ export const getByIdFichaSchema = z.object({
 });
 
 export type GetByIdFicha = z.infer<typeof getByIdFichaSchema>;
+
+export const getAllFichaSchema = z.object({
+  status: z.number(),
+  message: z.string(),
+  timestamp: z.string(),
+  fichaList: z.array(getOnefichaSchema),
+});
+
+export type GetAllFicha = z.infer<typeof getAllFichaSchema>;

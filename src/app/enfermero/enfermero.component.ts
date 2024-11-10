@@ -9,8 +9,7 @@ import { LayoutComponent } from '../Components/layout/layout.component';
 })
 export class EnfermeroComponent {
   menuItems = [
-    { label: 'Inicio', route: '/home' },
-    { label: 'Perfil', route: '/profile' },
-    { label: 'Configuración', route: '/settings' },
+    { label: 'Creaer preconsulta', route: '/enferemero/crear-preconsulta' },
+    { label: 'Ver preconsulta', route: '/enfermero/ver-preconsulta' },
   ];
 }
