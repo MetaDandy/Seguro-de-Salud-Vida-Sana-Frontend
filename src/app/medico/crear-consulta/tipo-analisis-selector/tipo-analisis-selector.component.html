@@ -1,0 +1,59 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="p-6 my-3 bg-gray-100 rounded-lg shadow-md space-y-4"
+>
+  @if(isAnalisis){
+
+  <h2 class="items-center">Tipo de analisis</h2>
+  }@else {
+  <h2 class="items-center">Tipo de examen</h2>
+
+  }
+  <div
+    *ngFor="let tipoAnalisis of tiposItems; let i = index"
+    class="flex items-center space-x-4"
+  >
+    <mat-checkbox
+      [checked]="getCheckboxChecked(tipoAnalisis.id)"
+      (change)="onCheckboxChange(tipoAnalisis, $event)"
+      color="primary"
+    >
+      {{ tipoAnalisis.nombre }}
+    </mat-checkbox>
+
+    <!-- Solo muestra el formulario adicional si el checkbox está marcado -->
+    <div *ngIf="getAnalisisGroup(tipoAnalisis.id) as analisisGroup">
+      <!-- Usa 'analisisGroup' solo si no es null -->
+      <div [formGroup]="analisisGroup" class="space-y-2">
+        <div class="flex flex-col">
+          <label class="text-sm font-medium text-gray-700">Resultado:</label>
+          <input
+            type="text"
+            formControlName="resultado"
+            matInput
+            class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="Ingrese el resultado"
+          />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="text-sm font-medium text-gray-700">Fecha:</label>
+          <input
+            type="date"
+            formControlName="fecha"
+            matInput
+            class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-4">
+    <app-submit-button
+      [label]="'Confirmar datos'"
+      [disabled]="form.invalid"
+    ></app-submit-button>
+  </div>
+</form>

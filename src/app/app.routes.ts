@@ -7,6 +7,7 @@ import { ObtenerFichaComponent } from './paciente/obtener-ficha/obtener-ficha.co
 import { VerFichasComponent } from './paciente/ver-fichas/ver-fichas.component';
 import { CrearPreconsultaComponent } from './enfermero/crear-preconsulta/crear-preconsulta.component';
 import { VerPreconsultaComponent } from './enfermero/ver-preconsulta/ver-preconsulta.component';
+import { CrearConsultaComponent } from './medico/crear-consulta/crear-consulta.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,12 @@ export const routes: Routes = [
   {
     path: 'medico',
     component: MedicoComponent,
+    children: [
+      {
+        path: 'crear-consulta',
+        component: CrearConsultaComponent,
+      },
+    ],
   },
   {
     path: 'paciente',

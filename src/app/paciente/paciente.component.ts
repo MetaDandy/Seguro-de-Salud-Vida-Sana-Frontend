@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { LayoutComponent } from '../Components/layout/layout.component';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-paciente',
   standalone: true,
-  imports: [LayoutComponent, RouterOutlet],
+  imports: [LayoutComponent],
   templateUrl: './paciente.component.html',
   styleUrl: './paciente.component.css',
 })

@@ -1,0 +1,35 @@
+<div class="p-4 space-y-4 bg-white rounded-lg shadow-lg max-w-md mx-auto">
+  <app-custom-select
+    [options]="options"
+    (selectionChange)="handleSelectionChange($event)"
+  ></app-custom-select>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Diagnóstico</mat-label>
+    <textarea
+      matInput
+      [(ngModel)]="diagnostico"
+      placeholder="Escriba el diagnóstico"
+      class="resize-none"
+    ></textarea>
+  </mat-form-field>
+
+  <app-tipo-analisis-selector
+    [isAnalisis]="true"
+    (analisisSeleccionadosOutput)="handleAnalisisChange($event)"
+  ></app-tipo-analisis-selector>
+
+  <app-tipo-analisis-selector
+    [isAnalisis]="false"
+    (analisisSeleccionadosOutput)="handleExamenesChange($event)"
+  ></app-tipo-analisis-selector>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="w-full mt-4"
+    (click)="createConsulta()"
+  >
+    Crear Consulta
+  </button>
+</div>

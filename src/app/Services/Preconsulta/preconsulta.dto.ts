@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { getOnefichaSchema } from '../Ficha/ficha.dto';
+import { enfermeroSchema } from '../Enfermero/enfermero.dto';
 
 export const createPreconsultaSchema = z.object({
   estado: z.string(),
@@ -13,16 +14,6 @@ export const createPreconsultaSchema = z.object({
 });
 
 export type CreatePreconsulta = z.infer<typeof createPreconsultaSchema>;
-
-const enfermeroSchema = z.object({
-  ci: z.number().int(),
-  name: z.string(),
-  age: z.number().int(),
-  birthDate: z.string().refine((date) => !isNaN(new Date(date).getTime()), {
-    message: 'Fecha de nacimiento inválida',
-  }),
-  email: z.string().email(),
-});
 
 const preconsultaSchema = z.object({
   id: z.number().int(),

@@ -14,6 +14,7 @@ import { createPreconsultaSchema } from '../../Services/Preconsulta/preconsulta.
 import { CustomInputComponent } from '../../Components/custom-input/custom-input.component';
 import { SubmitButtonComponent } from '../../Components/submit-button/submit-button.component';
 import { PreconsultaService } from '../../Services/Preconsulta/preconsulta.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-preconsulta',
@@ -116,7 +117,8 @@ export class CrearPreconsultaComponent {
     private fichaService: FichaService,
     private fechaService: Fecha,
     private snackBar: MatSnackBar,
-    private preconsultaService: PreconsultaService
+    private preconsultaService: PreconsultaService,
+    private router: Router
   ) {
     this.form = this.fb.group({
       estado: ['', Validators.required],
@@ -196,7 +198,7 @@ export class CrearPreconsultaComponent {
           duration: 3000,
         });
         console.log(response);
-        //todo: usar el navigate
+
         const fichasAtendidas = JSON.parse(
           localStorage.getItem('fichasAtendidas') || '[]'
         );
@@ -205,6 +207,8 @@ export class CrearPreconsultaComponent {
           'fichasAtendidas',
           JSON.stringify(fichasAtendidas)
         );
+
+        this.router.navigate(['/enfermero/ver-preconsulta']);
       },
       error: (err) => {
         this.snackBar.open('Error al crear la ficha', 'Cerrar', {
