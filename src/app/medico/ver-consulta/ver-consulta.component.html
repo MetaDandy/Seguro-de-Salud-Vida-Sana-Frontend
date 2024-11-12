@@ -1,0 +1,61 @@
+<!-- ver-consulta.component.html -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let consulta">{{ consulta.id }}</td>
+  </ng-container>
+
+  <!-- Fecha Column -->
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+    <td mat-cell *matCellDef="let consulta">{{ consulta.fecha }}</td>
+  </ng-container>
+
+  <!-- Diagnóstico Column -->
+  <ng-container matColumnDef="diagnostico">
+    <th mat-header-cell *matHeaderCellDef>Diagnóstico</th>
+    <td mat-cell *matCellDef="let consulta">{{ consulta.diagnostico }}</td>
+  </ng-container>
+
+  <!-- Nombre Paciente Column -->
+  <ng-container matColumnDef="nombrePaciente">
+    <th mat-header-cell *matHeaderCellDef>Paciente</th>
+    <td mat-cell *matCellDef="let consulta">
+      {{ consulta.preconsultaDto.ficha.nombrePaciente }}
+    </td>
+  </ng-container>
+
+  <!-- Exámenes Column -->
+  <ng-container matColumnDef="examenes">
+    <th mat-header-cell *matHeaderCellDef>Exámenes</th>
+    <td mat-cell *matCellDef="let consulta">
+      <ul>
+        <li *ngFor="let examen of consulta.examen">
+          {{ examen.examen.nombre }}: {{ examen.resultado }}
+        </li>
+      </ul>
+    </td>
+  </ng-container>
+
+  <!-- Análisis Column -->
+  <ng-container matColumnDef="analisis">
+    <th mat-header-cell *matHeaderCellDef>Análisis</th>
+    <td mat-cell *matCellDef="let consulta">
+      <ul>
+        <li *ngFor="let analisis of consulta.analisis">
+          {{ analisis.analisis.nombre }}: {{ analisis.resultado }}
+        </li>
+      </ul>
+    </td>
+  </ng-container>
+
+  <!-- Table Header and Rows -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+></mat-paginator>

@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { Fecha } from '../../Services/Fecha';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-consulta',
@@ -35,7 +36,8 @@ export class CrearConsultaComponent {
     private preconsultaService: PreconsultaService,
     private consultaService: ConsultaService,
     private snackBar: MatSnackBar,
-    private fecha: Fecha
+    private fecha: Fecha,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -90,6 +92,7 @@ export class CrearConsultaComponent {
 
     this.consultaService.createConsulta(consulta).subscribe({
       next: (response) => {
+        this.router.navigate(['medico/ver-consulta']);
         this.snackBar.open('Consulta creada exitosamente', 'Cerrar', {
           duration: 3000,
         });
@@ -118,7 +121,4 @@ export class CrearConsultaComponent {
 }
 /**
  * TODO: Hacer que se filtren las preconsultas por el dia actual
- * Hacer el navigate a ver consultas
- * Hacer ver consultas
- * Proxys con angular y netifly
  */
