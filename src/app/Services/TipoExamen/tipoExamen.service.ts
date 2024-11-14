@@ -2,7 +2,14 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../enviroments/enviroment';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { GetAllTipoExamen, getAllTipoExamenSchema } from './tipoExamen.dto';
+import {
+  GetAllTipoExamen,
+  getAllTipoExamenSchema,
+  CreateTipoExamen,
+  GetByIdTipoExamen,
+  examenSchema,
+  getByIdTipoExamenSchema,
+} from './tipoExamen.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +29,29 @@ export class TipoExamenService {
             throw new Error(
               'La respuesta del servidor no tiene el formato esperado'
             );
+          return result.data;
+        })
+      );
+  }
+
+  createTipoExamen(
+    tipoExamen: CreateTipoExamen
+  ): Observable<GetByIdTipoExamen> {
+    const tipoExamenValidation = examenSchema.safeParse(tipoExamen);
+    if (!tipoExamenValidation.success)
+      throw new Error('Los datos de la consulta no tienen el formato esperado');
+
+    return this.http
+      .post<CreateTipoExamen>(`${this.url}/tipo_examen/create`, tipoExamen)
+      .pipe(
+        map((response) => {
+          const result = getByIdTipoExamenSchema.safeParse(response);
+
+          if (!result.success)
+            throw new Error(
+              'La respuesta del servidor no tiene el formato esperado'
+            );
+
           return result.data;
         })
       );

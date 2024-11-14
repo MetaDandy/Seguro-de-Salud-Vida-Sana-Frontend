@@ -7,6 +7,8 @@ const tipoExmanSchema = z.object({
   costo: z.number().positive(),
 });
 
+export type CreateTipoExamen = z.infer<typeof tipoExmanSchema>;
+
 export const examenSchema = z.object({
   id: z.number().int().positive(),
   resultado: z.string(),
@@ -22,6 +24,8 @@ export const getByIdTipoExamenSchema = z.object({
   timestamp: z.string(),
   tipoExamen: tipoExmanSchema,
 });
+
+export type GetByIdTipoExamen = z.infer<typeof getByIdTipoExamenSchema>;
 
 export const getAllTipoExamenSchema = z.object({
   status: z.number(),

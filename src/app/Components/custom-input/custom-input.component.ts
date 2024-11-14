@@ -38,6 +38,8 @@ export class CustomInputComponent {
   @Input() config!: CustomInputConfig;
   @Input() control!: FormControl;
 
+  @Input() formControlAccessor?: boolean;
+
   getErrorMessage(): string | null {
     if (!this.control || !this.config.errorMessages) return null;
 
