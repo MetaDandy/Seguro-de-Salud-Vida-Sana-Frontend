@@ -22,5 +22,7 @@ export class AdminComponent {
     { label: 'Ver especialidad', route: '/admin/ver-especialidad' },
     { label: 'Crear horario', route: '/admin/crear-horario' },
     { label: 'Ver horario', route: '/admin/ver-horario' },
+    { label: 'Crear medico', route: '/admin/crear-medico' },
+    { label: 'Ver medico', route: '/admin/ver-medico' },
   ];
 }

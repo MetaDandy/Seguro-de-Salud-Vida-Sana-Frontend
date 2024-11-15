@@ -1,0 +1,80 @@
+<div class="max-w-7xl mx-auto p-4 bg-white rounded-lg shadow-md">
+  <h2 class="text-2xl font-semibold mb-4 text-gray-800">Lista de Médicos</h2>
+
+  <!-- Barra de búsqueda -->
+  <mat-form-field class="w-full mb-4" appearance="fill">
+    <mat-label>Buscar</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Buscar por nombre, email o especialidad"
+    />
+  </mat-form-field>
+
+  <!-- Tabla de médicos -->
+  <div class="overflow-x-auto">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+      <!-- CI -->
+      <ng-container matColumnDef="ci">
+        <th mat-header-cell *matHeaderCellDef class="text-left">CI</th>
+        <td mat-cell *matCellDef="let element">{{ element.ci }}</td>
+      </ng-container>
+
+      <!-- Nombre -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef class="text-left">Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Edad -->
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef class="text-left">Edad</th>
+        <td mat-cell *matCellDef="let element">{{ element.age }}</td>
+      </ng-container>
+
+      <!-- Fecha de nacimiento -->
+      <ng-container matColumnDef="birthDate">
+        <th mat-header-cell *matHeaderCellDef class="text-left">
+          Fecha de Nacimiento
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.birthDate | date : "longDate" }}
+        </td>
+      </ng-container>
+
+      <!-- Email -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef class="text-left">Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <!-- Especialidades -->
+      <ng-container matColumnDef="especialidades">
+        <th mat-header-cell *matHeaderCellDef class="text-left">
+          Especialidades
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <ul>
+            <li *ngFor="let especialidad of element.especialidades">
+              {{ especialidad }}
+            </li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+
+  <!-- Paginador -->
+  <mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)"
+    class="mt-4"
+  >
+  </mat-paginator>
+</div>
