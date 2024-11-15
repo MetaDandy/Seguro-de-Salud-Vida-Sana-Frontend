@@ -25,6 +25,8 @@ import { CrearMedicoComponent } from './admin/medico/crear-medico/crear-medico.c
 import { VerMedicoComponent } from './admin/medico/ver-medico/ver-medico.component';
 import { CrearEnfermeroComponent } from './admin/enfermero/crear-enfermero/crear-enfermero.component';
 import { VerEnfermeroComponent } from './admin/enfermero/ver-enfermero/ver-enfermero.component';
+import { CrearPacienteComponent } from './admin/paciente/crear-paciente/crear-paciente.component';
+import { VerPacienteComponent } from './admin/paciente/ver-paciente/ver-paciente.component';
 
 export const routes: Routes = [
   {
@@ -103,6 +105,14 @@ export const routes: Routes = [
       {
         path: 'ver-enfermero',
         component: VerEnfermeroComponent,
+      },
+      {
+        path: 'crear-paciente',
+        component: CrearPacienteComponent,
+      },
+      {
+        path: 'ver-paciente',
+        component: VerPacienteComponent,
       },
     ],
   },
