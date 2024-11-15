@@ -18,5 +18,7 @@ export class AdminComponent {
     { label: 'Ver tipo de insumos', route: '/admin/ver-TipoInsumo' },
     { label: 'Crear especialidad', route: '/admin/crear-especialidad' },
     { label: 'Ver especialidad', route: '/admin/ver-especialidad' },
+    { label: 'Crear horario', route: '/admin/crear-horario' },
+    { label: 'Ver horario', route: '/admin/ver-horario' },
   ];
 }

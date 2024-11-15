@@ -1,0 +1,56 @@
+<div class="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md">
+  <h2 class="text-2xl font-semibold mb-4 text-gray-800">Crear Horario</h2>
+
+  <form [formGroup]="horarioForm" (ngSubmit)="createHorario()">
+    <!-- Hora de Inicio -->
+    <mat-form-field class="w-full mb-4">
+      <mat-label>Hora de Inicio(am-pm)</mat-label>
+      <input matInput formControlName="horaInicio" type="time" required />
+      <mat-error *ngIf="horarioForm.get('horaInicio')?.hasError('required')">
+        La hora de inicio es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Hora de Fin -->
+    <mat-form-field class="w-full mb-4">
+      <mat-label>Hora de Fin(am-pm)</mat-label>
+      <input matInput formControlName="horaFin" type="time" required />
+      <mat-error *ngIf="horarioForm.get('horaFin')?.hasError('required')">
+        La hora de fin es obligatoria
+      </mat-error>
+      <mat-error *ngIf="!validateHoraFin()">
+        La hora de fin debe ser al menos 15 minutos después de la hora de inicio
+        y no más de 30 minutos.
+      </mat-error>
+    </mat-form-field>
+
+    <p>
+      La hora de inicio debe estar entre 15 a 30 minutos despues de la hora de
+      fin
+    </p>
+
+    <!-- Día -->
+    <mat-form-field class="w-full mb-4">
+      <mat-label>Día</mat-label>
+      <mat-select formControlName="dia" required>
+        <mat-option *ngFor="let dia of dias" [value]="dia">{{
+          dia
+        }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="horarioForm.get('dia')?.hasError('required')">
+        El día es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botón para enviar -->
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="horarioForm.invalid"
+      class="w-full"
+      type="submit"
+    >
+      Crear Horario
+    </button>
+  </form>
+</div>

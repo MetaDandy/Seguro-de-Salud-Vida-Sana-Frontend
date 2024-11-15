@@ -17,6 +17,8 @@ import { CrearTipoInsumosComponent } from './admin/tipoInsumos/crear-tipo-insumo
 import { VerTipoInsumosComponent } from './admin/tipoInsumos/ver-tipo-insumos/ver-tipo-insumos.component';
 import { CrearEspecialidadComponent } from './admin/especialidad/crear-especialidad/crear-especialidad.component';
 import { VerEspecialidadComponent } from './admin/especialidad/ver-especialidad/ver-especialidad.component';
+import { CrearHorarioComponent } from './admin/horario/crear-horario/crear-horario.component';
+import { VerHorarioComponent } from './admin/horario/ver-horario/ver-horario.component';
 
 export const routes: Routes = [
   {
@@ -63,6 +65,14 @@ export const routes: Routes = [
       {
         path: 'ver-especialidad',
         component: VerEspecialidadComponent,
+      },
+      {
+        path: 'crear-horario',
+        component: CrearHorarioComponent,
+      },
+      {
+        path: 'ver-horario',
+        component: VerHorarioComponent,
       },
     ],
   },
