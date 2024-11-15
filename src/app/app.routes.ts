@@ -13,6 +13,8 @@ import { CrearTipoExamenComponent } from './admin/crear-tipo-examen/crear-tipo-e
 import { VerTipoExamenComponent } from './admin/ver-tipo-examen/ver-tipo-examen.component';
 import { CrearTipoAnalisisComponent } from './admin/tipoAnalisis/crear-tipo-analisis/crear-tipo-analisis.component';
 import { VerTipoAnalisisComponent } from './admin/tipoAnalisis/ver-tipo-analisis/ver-tipo-analisis.component';
+import { CrearTipoInsumosComponent } from './admin/tipoInsumos/crear-tipo-insumos/crear-tipo-insumos.component';
+import { VerTipoInsumosComponent } from './admin/tipoInsumos/ver-tipo-insumos/ver-tipo-insumos.component';
 
 export const routes: Routes = [
   {
@@ -43,6 +45,14 @@ export const routes: Routes = [
       {
         path: 'ver-TipoAnalisis',
         component: VerTipoAnalisisComponent,
+      },
+      {
+        path: 'crear-TipoInsumo',
+        component: CrearTipoInsumosComponent,
+      },
+      {
+        path: 'ver-TipoInsumo',
+        component: VerTipoInsumosComponent,
       },
     ],
   },
