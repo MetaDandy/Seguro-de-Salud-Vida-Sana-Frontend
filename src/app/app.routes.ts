@@ -11,6 +11,8 @@ import { VerConsultaComponent } from './medico/ver-consulta/ver-consulta.compone
 import { AdminComponent } from './admin/admin.component';
 import { CrearTipoExamenComponent } from './admin/crear-tipo-examen/crear-tipo-examen.component';
 import { VerTipoExamenComponent } from './admin/ver-tipo-examen/ver-tipo-examen.component';
+import { CrearTipoAnalisisComponent } from './admin/tipoAnalisis/crear-tipo-analisis/crear-tipo-analisis.component';
+import { VerTipoAnalisisComponent } from './admin/tipoAnalisis/ver-tipo-analisis/ver-tipo-analisis.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +35,14 @@ export const routes: Routes = [
       {
         path: 'ver-tipoExamen',
         component: VerTipoExamenComponent,
+      },
+      {
+        path: 'crear-TipoAnalisis',
+        component: CrearTipoAnalisisComponent,
+      },
+      {
+        path: 'ver-TipoAnalisis',
+        component: VerTipoAnalisisComponent,
       },
     ],
   },

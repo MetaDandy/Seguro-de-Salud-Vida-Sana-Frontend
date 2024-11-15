@@ -1,11 +1,13 @@
 import { z } from 'zod';
 
-const tipoAnalisisSchema = z.object({
-  id: z.number().int().positive(),
+export const tipoAnalisisSchema = z.object({
+  id: z.number().int().positive().optional(),
   nombre: z.string(),
   descripcion: z.string(),
   costo: z.number().positive(),
 });
+
+export type CreateTipoAnalisis = z.infer<typeof tipoAnalisisSchema>;
 
 export const analisisSchema = z.object({
   id: z.number().int().positive(),
@@ -22,6 +24,8 @@ export const getByIdTipoAnalisisSchema = z.object({
   timestamp: z.string(),
   tipoAnalisis: tipoAnalisisSchema,
 });
+
+export type GetByIdTipoAnalisis = z.infer<typeof getByIdTipoAnalisisSchema>;
 
 export const getAllTipoAnalisisSchema = z.object({
   status: z.number(),

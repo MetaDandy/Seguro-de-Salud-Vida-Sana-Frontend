@@ -12,5 +12,7 @@ export class AdminComponent {
   menuItems = [
     { label: 'Crear Tipo de examen', route: '/admin/crear-tipoExamen' },
     { label: 'Ver tipo de examen', route: '/admin/ver-tipoExamen' },
+    { label: 'Crear Tipo de analisis', route: '/admin/crear-TipoAnalisis' },
+    { label: 'Ver tipo de analisis', route: '/admin/ver-TipoAnalisis' },
   ];
 }
