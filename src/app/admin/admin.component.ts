@@ -16,6 +16,8 @@ export class AdminComponent {
     { label: 'Ver tipo de analisis', route: '/admin/ver-TipoAnalisis' },
     { label: 'Crear Tipo de insumos', route: '/admin/crear-TipoInsumo' },
     { label: 'Ver tipo de insumos', route: '/admin/ver-TipoInsumo' },
+    { label: 'Crear insumos medicos', route: '/admin/crear-insumoMedico' },
+    { label: 'Ver insumos medicos', route: '/admin/ver-insumoMedico' },
     { label: 'Crear especialidad', route: '/admin/crear-especialidad' },
     { label: 'Ver especialidad', route: '/admin/ver-especialidad' },
     { label: 'Crear horario', route: '/admin/crear-horario' },

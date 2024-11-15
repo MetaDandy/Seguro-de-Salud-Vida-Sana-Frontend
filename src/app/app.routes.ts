@@ -19,6 +19,8 @@ import { CrearEspecialidadComponent } from './admin/especialidad/crear-especiali
 import { VerEspecialidadComponent } from './admin/especialidad/ver-especialidad/ver-especialidad.component';
 import { CrearHorarioComponent } from './admin/horario/crear-horario/crear-horario.component';
 import { VerHorarioComponent } from './admin/horario/ver-horario/ver-horario.component';
+import { CrearInsumoMedicoComponent } from './admin/insumoMedico/crear-insumo-medico/crear-insumo-medico.component';
+import { VerInsumoMedicoComponent } from './admin/insumoMedico/ver-insumo-medico/ver-insumo-medico.component';
 
 export const routes: Routes = [
   {
@@ -73,6 +75,14 @@ export const routes: Routes = [
       {
         path: 'ver-horario',
         component: VerHorarioComponent,
+      },
+      {
+        path: 'crear-insumoMedico',
+        component: CrearInsumoMedicoComponent,
+      },
+      {
+        path: 'ver-insumoMedico',
+        component: VerInsumoMedicoComponent,
       },
     ],
   },
