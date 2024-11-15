@@ -15,6 +15,8 @@ import { CrearTipoAnalisisComponent } from './admin/tipoAnalisis/crear-tipo-anal
 import { VerTipoAnalisisComponent } from './admin/tipoAnalisis/ver-tipo-analisis/ver-tipo-analisis.component';
 import { CrearTipoInsumosComponent } from './admin/tipoInsumos/crear-tipo-insumos/crear-tipo-insumos.component';
 import { VerTipoInsumosComponent } from './admin/tipoInsumos/ver-tipo-insumos/ver-tipo-insumos.component';
+import { CrearEspecialidadComponent } from './admin/especialidad/crear-especialidad/crear-especialidad.component';
+import { VerEspecialidadComponent } from './admin/especialidad/ver-especialidad/ver-especialidad.component';
 
 export const routes: Routes = [
   {
@@ -53,6 +55,14 @@ export const routes: Routes = [
       {
         path: 'ver-TipoInsumo',
         component: VerTipoInsumosComponent,
+      },
+      {
+        path: 'crear-especialidad',
+        component: CrearEspecialidadComponent,
+      },
+      {
+        path: 'ver-especialidad',
+        component: VerEspecialidadComponent,
       },
     ],
   },
