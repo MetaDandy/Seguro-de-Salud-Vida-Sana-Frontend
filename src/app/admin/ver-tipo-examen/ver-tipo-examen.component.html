@@ -1,0 +1,83 @@
+<div class="table-container p-4 mx-auto bg-white shadow-md rounded-lg">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="w-full mat-elevation-z8 rounded-lg"
+  >
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="px-4 py-2 font-semibold text-gray-700"
+      >
+        ID
+      </th>
+      <td mat-cell *matCellDef="let tipoExamen" class="px-4 py-2 text-gray-600">
+        {{ tipoExamen.id }}
+      </td>
+    </ng-container>
+
+    <!-- Nombre Column -->
+    <ng-container matColumnDef="nombre">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="px-4 py-2 font-semibold text-gray-700"
+      >
+        Nombre
+      </th>
+      <td mat-cell *matCellDef="let tipoExamen" class="px-4 py-2 text-gray-600">
+        {{ tipoExamen.nombre }}
+      </td>
+    </ng-container>
+
+    <!-- Descripción Column -->
+    <ng-container matColumnDef="descripcion">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="px-4 py-2 font-semibold text-gray-700"
+      >
+        Descripción
+      </th>
+      <td mat-cell *matCellDef="let tipoExamen" class="px-4 py-2 text-gray-600">
+        {{ tipoExamen.descripcion }}
+      </td>
+    </ng-container>
+
+    <!-- Fecha Creación Column -->
+    <ng-container matColumnDef="fechaCreacion">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        class="px-4 py-2 font-semibold text-gray-700"
+      >
+        Costo
+      </th>
+      <td mat-cell *matCellDef="let tipoExamen" class="px-4 py-2 text-gray-600">
+        {{ tipoExamen.costo }}
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+      class="bg-gray-100"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      class="hover:bg-gray-50"
+    ></tr>
+  </table>
+
+  <!-- Paginador de Angular Material -->
+  <mat-paginator
+    class="mt-4 border-t border-gray-200 pt-2"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>

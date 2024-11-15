@@ -7,8 +7,8 @@ import {
   getAllTipoExamenSchema,
   CreateTipoExamen,
   GetByIdTipoExamen,
-  examenSchema,
   getByIdTipoExamenSchema,
+  tipoExmanSchema,
 } from './tipoExamen.dto';
 
 @Injectable({
@@ -37,7 +37,9 @@ export class TipoExamenService {
   createTipoExamen(
     tipoExamen: CreateTipoExamen
   ): Observable<GetByIdTipoExamen> {
-    const tipoExamenValidation = examenSchema.safeParse(tipoExamen);
+    console.log(tipoExamen);
+
+    const tipoExamenValidation = tipoExmanSchema.safeParse(tipoExamen);
     if (!tipoExamenValidation.success)
       throw new Error('Los datos de la consulta no tienen el formato esperado');
 
@@ -45,6 +47,8 @@ export class TipoExamenService {
       .post<CreateTipoExamen>(`${this.url}/tipo_examen/create`, tipoExamen)
       .pipe(
         map((response) => {
+          console.log(response);
+
           const result = getByIdTipoExamenSchema.safeParse(response);
 
           if (!result.success)

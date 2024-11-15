@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-const tipoExmanSchema = z.object({
-  id: z.number().int().positive(),
+export const tipoExmanSchema = z.object({
+  id: z.number().int().positive().optional(),
   nombre: z.string(),
   descripcion: z.string(),
   costo: z.number().positive(),

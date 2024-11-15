@@ -10,6 +10,7 @@ import { CrearConsultaComponent } from './medico/crear-consulta/crear-consulta.c
 import { VerConsultaComponent } from './medico/ver-consulta/ver-consulta.component';
 import { AdminComponent } from './admin/admin.component';
 import { CrearTipoExamenComponent } from './admin/crear-tipo-examen/crear-tipo-examen.component';
+import { VerTipoExamenComponent } from './admin/ver-tipo-examen/ver-tipo-examen.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,10 @@ export const routes: Routes = [
       {
         path: 'crear-tipoExamen',
         component: CrearTipoExamenComponent,
+      },
+      {
+        path: 'ver-tipoExamen',
+        component: VerTipoExamenComponent,
       },
     ],
   },
