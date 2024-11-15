@@ -1,0 +1,75 @@
+<div class="max-w-lg mx-auto p-4 bg-white shadow-md rounded-lg">
+  <h2 class="text-2xl font-bold mb-4">Crear Enfermero</h2>
+  <form [formGroup]="enfermeroForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>CI</mat-label>
+      <input matInput formControlName="ci" placeholder="Cédula de Identidad" />
+      <mat-error *ngIf="enfermeroForm.get('ci')?.invalid">
+        CI es obligatorio y debe tener entre 7 y 8 dígitos.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" placeholder="Nombre completo" />
+      <mat-error *ngIf="enfermeroForm.get('name')?.invalid">
+        El nombre es obligatorio y debe tener al menos 3 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Edad</mat-label>
+      <input matInput type="number" formControlName="age" placeholder="Edad" />
+      <mat-error *ngIf="enfermeroForm.get('age')?.invalid">
+        La edad es obligatoria y debe ser mayor o igual a 18 años.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput type="date" formControlName="birthDate" />
+      <mat-error *ngIf="enfermeroForm.get('birthDate')?.invalid">
+        La fecha de nacimiento es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Correo Electrónico</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        placeholder="Correo electrónico"
+      />
+      <mat-error *ngIf="enfermeroForm.get('email')?.invalid">
+        Debes proporcionar un correo electrónico válido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Contraseña</mat-label>
+      <input
+        matInput
+        type="password"
+        formControlName="password"
+        placeholder="Contraseña"
+      />
+      <mat-error *ngIf="enfermeroForm.get('password')?.invalid">
+        La contraseña es obligatoria y debe tener al menos 8 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="isLoading"
+      class="w-full"
+    >
+      {{ isLoading ? "Creando..." : "Crear Enfermero" }}
+    </button>
+  </form>
+
+  <div class="mt-4" *ngIf="isLoading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+</div>
