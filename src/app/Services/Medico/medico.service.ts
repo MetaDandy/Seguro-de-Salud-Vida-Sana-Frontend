@@ -27,6 +27,20 @@ export class MedicoService {
       );
   }
 
+  getByCiMedico(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http
+      .get<any>(`${this.url}/${this.route}/getbyCi/${id}`, { headers })
+      .pipe(
+        map((response) => {
+          console.log('Datos obtenidos:', response);
+          return response;
+        })
+      );
+  }
+
   createMedico(data: any): Observable<any> {
     console.log(data);
 

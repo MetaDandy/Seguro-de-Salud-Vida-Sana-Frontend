@@ -28,5 +28,7 @@ export class AdminComponent {
     { label: 'Ver enfermero', route: '/admin/ver-enfermero' },
     { label: 'Crear medico', route: '/admin/crear-medico' },
     { label: 'Ver medico', route: '/admin/ver-medico' },
+    { label: 'Crear horario medico', route: '/admin/crear-horarioMedico' },
+    { label: 'Ver horario medico', route: '/admin/ver-horarioMedico' },
   ];
 }

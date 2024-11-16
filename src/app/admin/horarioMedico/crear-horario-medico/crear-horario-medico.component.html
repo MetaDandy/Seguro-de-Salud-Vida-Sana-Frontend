@@ -1,0 +1,60 @@
+<div class="container">
+  <h2 class="text-2xl font-bold mb-4">Crear Horario para Médico</h2>
+
+  <!-- Selector de Médicos -->
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Seleccionar Médico</mat-label>
+    <mat-select
+      [(ngModel)]="selectedMedico"
+      (selectionChange)="onMedicoChange()"
+    >
+      <mat-option *ngFor="let medico of medicos" [value]="medico.value">
+        {{ medico.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Seleccionar Especialidad</mat-label>
+    <mat-select [(ngModel)]="selectedEspecialidad">
+      <mat-option
+        *ngFor="let especialidad of especialidades"
+        [value]="especialidad.value"
+      >
+        {{ especialidad.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Seleccionar Día</mat-label>
+    <mat-select [(ngModel)]="selectedDia" (selectionChange)="onDiaChange()">
+      <mat-option *ngFor="let dia of diasMapeados" [value]="dia.value">
+        {{ dia.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Checkboxes de Horarios -->
+  <div *ngIf="horariosFiltrados.length > 0" class="mt-4">
+    <h3 class="text-lg font-semibold mb-2">Horarios Disponibles</h3>
+    <div
+      *ngFor="let horario of horariosFiltrados"
+      class="flex items-center mb-2"
+    >
+      <mat-checkbox
+        [checked]="selectedHorarios.includes(horario.id)"
+        (change)="
+          $event.checked
+            ? selectedHorarios.push(horario.id)
+            : selectedHorarios.splice(selectedHorarios.indexOf(horario.id), 1)
+        "
+      >
+        {{ horario.horaInicio }} - {{ horario.horaFin }}
+      </mat-checkbox>
+    </div>
+  </div>
+
+  <!-- Botón para Enviar -->
+  <button mat-button (click)="onSubmit()">Crear Horario</button>
+</div>
