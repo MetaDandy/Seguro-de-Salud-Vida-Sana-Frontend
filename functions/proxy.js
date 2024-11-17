@@ -1,4 +1,4 @@
-// const fetch = require("node-fetch"); // Si usas node-fetch
+/* // const fetch = require("node-fetch"); // Si usas node-fetch
 const fetch = globalThis.fetch; // Si usas Node.js v18+
 
 exports.handler = async (event) => {
@@ -45,3 +45,4 @@ exports.handler = async (event) => {
     console.log("Proxy function execution completed.");
   }
 };
+ */
