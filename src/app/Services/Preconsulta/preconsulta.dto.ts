@@ -28,6 +28,7 @@ const preconsultaSchema = z.object({
   nombreEnfermero: z.string(),
   enfermero: enfermeroSchema,
   ficha: getOnefichaSchema,
+  preconsultaTerminada: z.string().date().optional(),
 });
 
 export const getByIdPreconsultaSchema = z.object({

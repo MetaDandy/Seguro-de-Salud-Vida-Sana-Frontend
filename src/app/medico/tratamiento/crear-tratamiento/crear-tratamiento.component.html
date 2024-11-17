@@ -1,0 +1,90 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6"
+>
+  <!-- Título -->
+  <h2 class="text-2xl font-bold text-gray-800 text-center">
+    Crear Tratamiento
+  </h2>
+
+  <!-- Select de consultas -->
+  <div>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Seleccione una consulta</mat-label>
+      <mat-select formControlName="id_consulta" required>
+        <mat-option *ngFor="let consulta of consultas" [value]="consulta.id">
+          {{ consulta.diagnostico }} ({{ consulta.fecha }}) -
+          {{ consulta.preconsultaDto.ficha.nombrePaciente }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div
+      *ngIf="
+        form.controls['id_consulta'].invalid &&
+        form.controls['id_consulta'].touched
+      "
+      class="text-red-500 text-sm"
+    >
+      Seleccione una consulta válida.
+    </div>
+  </div>
+
+  <!-- Campo de descripción -->
+  <div>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Descripción</mat-label>
+      <textarea
+        matInput
+        placeholder="Ingrese una descripción para el tratamiento"
+        formControlName="descripcion"
+        required
+        class="resize-none"
+      ></textarea>
+    </mat-form-field>
+    <div
+      *ngIf="
+        form.controls['descripcion'].invalid &&
+        form.controls['descripcion'].touched
+      "
+      class="text-red-500 text-sm"
+    >
+      La descripción debe tener al menos 5 caracteres.
+    </div>
+  </div>
+
+  <!-- Fecha -->
+  <div>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Fecha</mat-label>
+      <input matInput type="date" formControlName="fecha" required />
+    </mat-form-field>
+    <div
+      *ngIf="form.controls['fecha'].invalid && form.controls['fecha'].touched"
+      class="text-red-500 text-sm"
+    >
+      Ingrese una fecha válida.
+    </div>
+  </div>
+
+  <!-- Componente de insumos médicos -->
+  <div class="items-center">
+    <app-check-insumo-medico
+      [insumoMedicoList]="[]"
+      (insumoTratamientoOutput)="onInsumoTratamientoChange($event)"
+      class="mt-4"
+    ></app-check-insumo-medico>
+  </div>
+
+  <!-- Botón de guardar -->
+  <div class="text-center">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="w-ful py-2 rounded-lg"
+    >
+      Guardar Tratamiento
+    </button>
+  </div>
+</form>

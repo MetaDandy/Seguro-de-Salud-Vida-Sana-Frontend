@@ -1,116 +1,43 @@
-import { Component } from '@angular/core';
-import { CustomSelectComponent } from '../../Components/custom-select/custom-select.component';
-import { FichaService } from '../../Services/Ficha/ficha.service';
-import { Fecha } from '../../Services/Fecha';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
-  ReactiveFormsModule,
   Validators,
+  ReactiveFormsModule,
 } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { createPreconsultaSchema } from '../../Services/Preconsulta/preconsulta.dto';
-import { CustomInputComponent } from '../../Components/custom-input/custom-input.component';
-import { SubmitButtonComponent } from '../../Components/submit-button/submit-button.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { FichaService } from '../../Services/Ficha/ficha.service';
+import { Fecha } from '../../Services/Fecha';
 import { PreconsultaService } from '../../Services/Preconsulta/preconsulta.service';
 import { Router } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-crear-preconsulta',
   standalone: true,
   imports: [
-    CustomSelectComponent,
     ReactiveFormsModule,
-    CustomInputComponent,
-    SubmitButtonComponent,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    CommonModule,
   ],
   templateUrl: './crear-preconsulta.component.html',
-  styleUrl: './crear-preconsulta.component.css',
+  styleUrls: ['./crear-preconsulta.component.css'],
 })
-export class CrearPreconsultaComponent {
+export class CrearPreconsultaComponent implements OnInit {
   form: FormGroup;
   options: { value: number; label: string }[] = [];
-  selectedOption: any;
-
-  estadoConfig = {
-    label: 'Estado',
-    type: 'text',
-    errorMessages: {
-      required: 'Este campo es obligatorio',
-    },
-  };
-
-  pesoConfig = {
-    label: 'Peso',
-    type: 'number',
-    errorMessages: {
-      required: 'Este campo es obligatorio',
-      min: 'Peso no puede ser negativo',
-    },
-  };
-
-  alturaConfig = {
-    label: 'Altura',
-    type: 'number',
-    errorMessages: {
-      required: 'Este campo es obligatorio',
-      min: 'Altura no puede ser negativa',
-    },
-  };
-
-  edadConfig = {
-    label: 'Edad',
-    type: 'number',
-    errorMessages: {
-      required: 'Este campo es obligatorio',
-      min: 'Edad no puede ser negativa',
-    },
-  };
-
-  sexoConfig = {
-    label: 'Sexo',
-    type: 'text',
-    errorMessages: {
-      required: 'Este campo es obligatorio',
-    },
-  };
-
-  presionConfig = {
-    label: 'Presión',
-    type: 'text',
-    errorMessages: {
-      required: 'Este campo es obligatorio',
-    },
-  };
-
-  get estadoControl(): FormControl {
-    return this.form.get('estado') as FormControl;
-  }
-
-  get pesoControl(): FormControl {
-    return this.form.get('peso') as FormControl;
-  }
-
-  get alturaControl(): FormControl {
-    return this.form.get('altura') as FormControl;
-  }
-
-  get edadControl(): FormControl {
-    return this.form.get('edad') as FormControl;
-  }
-
-  get sexoControl(): FormControl {
-    return this.form.get('sexo') as FormControl;
-  }
-
-  get presionControl(): FormControl {
-    return this.form.get('presion') as FormControl;
-  }
-
-  get ciEnfermeroControl(): FormControl {
-    return this.form.get('ci_enfermero') as FormControl;
-  }
+  sexOptions = [
+    { value: 'Masculino', label: 'Masculino' },
+    { value: 'Femenino', label: 'Femenino' },
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -127,11 +54,11 @@ export class CrearPreconsultaComponent {
       edad: ['', [Validators.required, Validators.min(0)]],
       sexo: ['', Validators.required],
       presion: ['', Validators.required],
+      id_Ficha: ['', Validators.required],
       ci_enferemero: [
         parseInt(localStorage.getItem('ci') || '0'),
         Validators.required,
       ],
-      id_Ficha: ['', Validators.required],
     });
   }
 
@@ -141,22 +68,18 @@ export class CrearPreconsultaComponent {
 
   loadTodayFichas() {
     const today = this.fechaService.obtenerFechaLocal(); // Obtener la fecha actual
-    const fichasAtendidas = JSON.parse(
-      localStorage.getItem('fichasAtendidas') || '[]'
-    );
 
     this.fichaService.getAllFicha().subscribe({
       next: (response) => {
         this.options = response.fichaList
-          //quitar el comentario por el filter cuando no sea finde
           .filter(
             (ficha) =>
               //ficha.fechaAtencion === today &&
-              !fichasAtendidas.includes(ficha.id)
+              !ficha.fichaTerminada
           )
           .map((ficha) => ({
             value: ficha.id,
-            label: `${ficha.nombrePaciente} - ${ficha.horaAtencion} - ${ficha.fechaAtencion}`,
+            label: `${ficha.nombrePaciente} - ${ficha.horaAtencion} - ${ficha.fechaAtencion} - ${ficha.nombreEspecialidad} - ${ficha.nombreMedico}`,
           }));
       },
       error: (error) => {
@@ -165,11 +88,18 @@ export class CrearPreconsultaComponent {
     });
   }
 
-  handleSelectionChange(value: any) {
-    this.form.get('id_Ficha')?.setValue(value);
-  }
-
   submitPreconsulta() {
+    if (this.form.invalid) {
+      this.snackBar.open(
+        'Por favor, completa todos los campos correctamente.',
+        'Cerrar',
+        {
+          duration: 3000,
+        }
+      );
+      return;
+    }
+
     const formData = {
       ...this.form.value,
       peso: parseFloat(this.form.value.peso),
@@ -177,41 +107,16 @@ export class CrearPreconsultaComponent {
       edad: parseInt(this.form.value.edad, 10),
     };
 
-    const validation = createPreconsultaSchema.safeParse(formData);
-
-    if (!validation.success) {
-      this.snackBar.open('Error en los datos ingresados.', 'Cerrar', {
-        duration: 3000,
-      });
-      console.error(validation.error);
-      return;
-    }
-
-    // Lógica para enviar los datos (simulada aquí)
-    console.log('Preconsulta creada:', formData);
-    this.snackBar.open('Preconsulta creada exitosamente!', 'Cerrar', {
-      duration: 3000,
-    });
     this.preconsultaService.createPreconsulta(formData).subscribe({
-      next: (response) => {
-        this.snackBar.open('Ficha creada exitosamente', 'Cerrar', {
+      next: () => {
+        this.snackBar.open('Preconsulta creada exitosamente!', 'Cerrar', {
           duration: 3000,
         });
-        console.log(response);
-
-        const fichasAtendidas = JSON.parse(
-          localStorage.getItem('fichasAtendidas') || '[]'
-        );
-        fichasAtendidas.push(formData.id_Ficha);
-        localStorage.setItem(
-          'fichasAtendidas',
-          JSON.stringify(fichasAtendidas)
-        );
 
         this.router.navigate(['/enfermero/ver-preconsulta']);
       },
       error: (err) => {
-        this.snackBar.open('Error al crear la ficha', 'Cerrar', {
+        this.snackBar.open('Error al crear la ficha.', 'Cerrar', {
           duration: 3000,
         });
         console.error(err);

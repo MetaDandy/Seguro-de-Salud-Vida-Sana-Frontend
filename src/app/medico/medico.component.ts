@@ -12,5 +12,7 @@ export class MedicoComponent {
   menuItems = [
     { label: 'Crear Consulta', route: '/medico/crear-consulta' },
     { label: 'Ver Consulta', route: '/medico/ver-consulta' },
+    { label: 'Crear Tratamiento', route: '/medico/crear-tratamiento' },
+    { label: 'Ver Tratamiento', route: '/medico/ver-tratamiento' },
   ];
 }

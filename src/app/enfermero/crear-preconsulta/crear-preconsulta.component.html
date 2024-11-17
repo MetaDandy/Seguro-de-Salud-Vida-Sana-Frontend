@@ -1,61 +1,67 @@
 <form [formGroup]="form" (ngSubmit)="submitPreconsulta()">
   <div class="space-y-6">
     <!-- Selector de Ficha -->
-    <div class="flex flex-col md:flex-row gap-4">
-      <app-custom-select
-        [options]="options"
-        placeholder="Selecciona una ficha"
-        (selectionChange)="handleSelectionChange($event)"
-        class="flex-1"
-      ></app-custom-select>
-    </div>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Selecciona una ficha</mat-label>
+      <mat-select formControlName="id_Ficha">
+        <mat-option *ngFor="let option of options" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <!-- Campos de entrada -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <app-custom-input
-        [config]="estadoConfig"
-        [control]="estadoControl"
-        class="w-full"
-      ></app-custom-input>
+      <!-- Estado -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Estado</mat-label>
+        <input matInput formControlName="estado" />
+      </mat-form-field>
 
-      <app-custom-input
-        [config]="pesoConfig"
-        [control]="pesoControl"
-        class="w-full"
-      ></app-custom-input>
+      <!-- Peso -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Peso</mat-label>
+        <input matInput type="number" formControlName="peso" />
+      </mat-form-field>
 
-      <app-custom-input
-        [config]="alturaConfig"
-        [control]="alturaControl"
-        class="w-full"
-      ></app-custom-input>
+      <!-- Altura -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Altura</mat-label>
+        <input matInput type="number" formControlName="altura" />
+      </mat-form-field>
 
-      <app-custom-input
-        [config]="edadConfig"
-        [control]="edadControl"
-        class="w-full"
-      ></app-custom-input>
+      <!-- Edad -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Edad</mat-label>
+        <input matInput type="number" formControlName="edad" />
+      </mat-form-field>
 
-      <app-custom-input
-        [config]="sexoConfig"
-        [control]="sexoControl"
-        class="w-full"
-      ></app-custom-input>
+      <!-- Sexo -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Sexo</mat-label>
+        <mat-select formControlName="sexo">
+          <mat-option *ngFor="let sex of sexOptions" [value]="sex.value">
+            {{ sex.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-      <app-custom-input
-        [config]="presionConfig"
-        [control]="presionControl"
-        class="w-full"
-      ></app-custom-input>
+      <!-- Presión -->
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Presión</mat-label>
+        <input matInput formControlName="presion" />
+      </mat-form-field>
     </div>
-
-    <!-- Botón de submit -->
+    <!-- Botón de Enviar -->
     <div class="flex justify-center">
-      <app-submit-button
-        class="w-full md:w-auto"
-        [label]="'Crear Preconsulta'"
+      <button
+        mat-raised-button
+        color="primary"
         [disabled]="form.invalid"
-      />
+        type="submit"
+        class="w-full md:w-auto"
+      >
+        Crear Preconsulta
+      </button>
     </div>
   </div>
 </form>

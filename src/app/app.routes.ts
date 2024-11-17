@@ -29,6 +29,8 @@ import { CrearPacienteComponent } from './admin/paciente/crear-paciente/crear-pa
 import { VerPacienteComponent } from './admin/paciente/ver-paciente/ver-paciente.component';
 import { CrearHorarioMedicoComponent } from './admin/horarioMedico/crear-horario-medico/crear-horario-medico.component';
 import { VerHorarioMedicoComponent } from './admin/horarioMedico/ver-horario-medico/ver-horario-medico.component';
+import { CrearTratamientoComponent } from './medico/tratamiento/crear-tratamiento/crear-tratamiento.component';
+import { VerTratamientoComponent } from './medico/tratamiento/ver-tratamiento/ver-tratamiento.component';
 
 export const routes: Routes = [
   {
@@ -151,6 +153,14 @@ export const routes: Routes = [
       {
         path: 'ver-consulta',
         component: VerConsultaComponent,
+      },
+      {
+        path: 'crear-tratamiento',
+        component: CrearTratamientoComponent,
+      },
+      {
+        path: 'ver-tratamiento',
+        component: VerTratamientoComponent,
       },
     ],
   },

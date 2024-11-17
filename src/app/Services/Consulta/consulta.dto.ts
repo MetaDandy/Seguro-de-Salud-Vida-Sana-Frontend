@@ -57,6 +57,7 @@ const consultaSchema = z.object({
   preconsultaDto: preconsultaSchema,
   examen: z.array(examenSchema),
   analisis: z.array(analisisSchema),
+  consultaTerminada: z.string().date().optional(),
 });
 
 export const getByIdConsultaSchema = z.object({

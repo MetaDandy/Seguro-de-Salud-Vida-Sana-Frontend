@@ -48,12 +48,11 @@ export class CrearConsultaComponent {
     this.preconsultaService.getAllPreconsulta().subscribe({
       next: (response: GetAllPreconsulta) => {
         // Filtrar preconsultas ya utilizadas
-        const usedPreconsultas = this.getUsedPreconsultas();
         this.options = response.preconsultaList
-          .filter((preconsulta) => !usedPreconsultas.includes(preconsulta.id))
+          .filter((preconsulta) => !preconsulta.preconsultaTerminada)
           .map((preconsulta) => ({
             value: preconsulta.id,
-            label: `${preconsulta.enfermero.name} - ${preconsulta.estado}`,
+            label: `${preconsulta.ficha.nombrePaciente} - ${preconsulta.estado} - ${preconsulta.ficha.nombreEspecialidad}`,
           }));
       },
       error: (error) => {
@@ -96,27 +95,11 @@ export class CrearConsultaComponent {
         this.snackBar.open('Consulta creada exitosamente', 'Cerrar', {
           duration: 3000,
         });
-        this.saveUsedPreconsulta(this.selectedOption!); // Guardar la preconsulta usada
       },
       error: (error) => {
         console.error('Error al crear la consulta:', error);
       },
     });
-  }
-
-  saveUsedPreconsulta(id: number) {
-    const usedPreconsultas = this.getUsedPreconsultas();
-    if (!usedPreconsultas.includes(id)) {
-      usedPreconsultas.push(id);
-      localStorage.setItem(
-        'usedPreconsultas',
-        JSON.stringify(usedPreconsultas)
-      );
-    }
-  }
-
-  getUsedPreconsultas(): number[] {
-    return JSON.parse(localStorage.getItem('usedPreconsultas') || '[]');
   }
 }
 /**

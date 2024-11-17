@@ -30,6 +30,7 @@ export const getOnefichaSchema = z.object({
   nombrePaciente: z.string(),
   nombreMedico: z.string(),
   nombreEspecialidad: z.string(),
+  fichaTerminada: z.string().date().optional(),
 });
 
 export const getByIdFichaSchema = z.object({

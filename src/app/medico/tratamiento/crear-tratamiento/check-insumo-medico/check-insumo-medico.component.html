@@ -1,0 +1,25 @@
+<div *ngFor="let insumo of insumoMedicoList">
+  <!-- Checkbox para seleccionar el insumo -->
+  <mat-checkbox
+    [checked]="isInsumoSelected(insumo.id)"
+    (change)="onCheckboxChange(insumo, $event)"
+  >
+    {{ insumo.nombre }}
+  </mat-checkbox>
+
+  <!-- Si el insumo está seleccionado, mostramos el input para la cantidad -->
+  <div *ngIf="isInsumoSelected(insumo.id)">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Cantidad"
+        type="number"
+        min="1"
+        [formControl]="getInsumoControl(insumo.id)"
+      />
+    </mat-form-field>
+  </div>
+</div>
+
+<!-- Botón para guardar y emitir los datos -->
+<!-- <button mat-raised-button (click)="onSubmit($event)">Guardar</button> -->
