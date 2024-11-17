@@ -12,5 +12,6 @@ export class PacienteComponent {
   menuItems = [
     { label: 'Obtener ficha', route: '/paciente/obtener-ficha' },
     { label: 'Ver ficha', route: '/paciente/ver-ficha' },
+    { label: 'Historial', route: '/paciente/historial' },
   ];
 }

@@ -62,4 +62,8 @@ export class FichaService {
       })
     );
   }
+
+  cancelFicha(id: number): Observable<any> {
+    return this.http.put<any>(`${this.url}/ficha/cancel/${id}`, {});
+  }
 }

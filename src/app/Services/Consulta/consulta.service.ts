@@ -54,4 +54,8 @@ export class ConsultaService {
       })
     );
   }
+
+  historial(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}/consulta/historial/${id}`);
+  }
 }

@@ -31,6 +31,8 @@ import { CrearHorarioMedicoComponent } from './admin/horarioMedico/crear-horario
 import { VerHorarioMedicoComponent } from './admin/horarioMedico/ver-horario-medico/ver-horario-medico.component';
 import { CrearTratamientoComponent } from './medico/tratamiento/crear-tratamiento/crear-tratamiento.component';
 import { VerTratamientoComponent } from './medico/tratamiento/ver-tratamiento/ver-tratamiento.component';
+import { CancelarFichasComponent } from './medico/cancelar-fichas/cancelar-fichas.component';
+import { HistorialComponent } from './paciente/historial/historial.component';
 
 export const routes: Routes = [
   {
@@ -162,6 +164,10 @@ export const routes: Routes = [
         path: 'ver-tratamiento',
         component: VerTratamientoComponent,
       },
+      {
+        path: 'cancelar-ficha',
+        component: CancelarFichasComponent,
+      },
     ],
   },
   {
@@ -175,6 +181,10 @@ export const routes: Routes = [
       {
         path: 'ver-ficha',
         component: VerFichasComponent,
+      },
+      {
+        path: 'historial',
+        component: HistorialComponent,
       },
     ],
   },

@@ -1,0 +1,68 @@
+<div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg space-y-6">
+  <h2 class="text-2xl font-bold text-center text-gray-800">Historial Médico</h2>
+
+  <div *ngIf="!historial" class="text-center">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="50"
+    ></mat-progress-spinner>
+    <p class="text-gray-600">Cargando historial...</p>
+  </div>
+
+  <div *ngIf="historial" class="space-y-4">
+    <h3 class="text-xl font-semibold text-gray-700">
+      Paciente: {{ historial.id_paciente }}
+    </h3>
+
+    <div *ngFor="let consulta of historial.consultas; let i = index">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Consulta {{ i + 1 }}</mat-card-title>
+          <mat-card-subtitle>Fecha: {{ consulta.fecha }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Diagnóstico:</strong> {{ consulta.diagnostico }}</p>
+
+          <div *ngIf="consulta.examen.length > 0">
+            <h4 class="font-semibold">Exámenes:</h4>
+            <ul>
+              <li *ngFor="let ex of consulta.examen">
+                {{ ex.examen.nombre }} - {{ ex.resultado }} ($
+                {{ ex.examen.costo }})
+              </li>
+            </ul>
+          </div>
+
+          <div *ngIf="consulta.analisis.length > 0">
+            <h4 class="font-semibold">Análisis:</h4>
+            <ul>
+              <li *ngFor="let an of consulta.analisis">
+                {{ an.analisis.nombre }} - {{ an.resultado }} ($
+                {{ an.analisis.costo }})
+              </li>
+            </ul>
+          </div>
+
+          <div *ngIf="consulta.tratamientos">
+            <h4 class="font-semibold">Tratamientos:</h4>
+            <p>
+              {{ consulta.tratamientos.descripcion }} - Fecha:
+              {{ consulta.tratamientos.fecha }}
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="text-center mt-6">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="generatePDF()"
+        class="py-2 px-4"
+      >
+        Descargar Historial en PDF
+      </button>
+    </div>
+  </div>
+</div>

@@ -14,5 +14,6 @@ export class MedicoComponent {
     { label: 'Ver Consulta', route: '/medico/ver-consulta' },
     { label: 'Crear Tratamiento', route: '/medico/crear-tratamiento' },
     { label: 'Ver Tratamiento', route: '/medico/ver-tratamiento' },
+    { label: 'Cancela ficha', route: '/medico/cancelar-ficha' },
   ];
 }
