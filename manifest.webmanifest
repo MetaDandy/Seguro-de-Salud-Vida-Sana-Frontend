@@ -1,0 +1,21 @@
+{
+  "name": "Seguro de salud Vida Sana",
+  "short_name": "Vida Sana",
+  "description": "Seguro de salud vida sana pwa",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1976d2",
+  "icons": [
+    {
+      "src": "assets/icons/apple-touch-icon.jpg",
+      "sizes": "180x180",
+      "type": "image/jpg"
+    },
+    {
+      "src": "assets/icons/icon 512 x 512.png",
+      "sizes": "520x520",
+      "type": "image/png"
+    }
+  ]
+}
