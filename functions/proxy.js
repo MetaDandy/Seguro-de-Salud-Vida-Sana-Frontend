@@ -4,10 +4,7 @@ const fetch = globalThis.fetch; // Si usas Node.js v18+
 exports.handler = async (event) => {
   console.log("Request received:", JSON.stringify(event, null, 2));
 
-  const targetUrl = `http://ec2-52-15-169-133.us-east-2.compute.amazonaws.com/api${event.path.replace(
-    "/api",
-    ""
-  )}`;
+  const targetUrl = `http://ec2-52-15-169-133.us-east-2.compute.amazonaws.com${event.path}`;
 
   console.log("Target URL:", targetUrl);
 

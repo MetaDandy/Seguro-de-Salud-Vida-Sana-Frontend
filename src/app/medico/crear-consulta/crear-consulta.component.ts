@@ -54,6 +54,7 @@ export class CrearConsultaComponent {
             value: preconsulta.id,
             label: `${preconsulta.ficha.nombrePaciente} - ${preconsulta.estado} - ${preconsulta.ficha.nombreEspecialidad}`,
           }));
+        console.log(response);
       },
       error: (error) => {
         console.error('Error al cargar las preconsultas:', error);

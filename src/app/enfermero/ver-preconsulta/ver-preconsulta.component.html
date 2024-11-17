@@ -42,9 +42,9 @@
 
     <!-- Nombre del Enfermero Column -->
     <ng-container matColumnDef="nombreEnfermero">
-      <th mat-header-cell *matHeaderCellDef>Enfermero</th>
+      <th mat-header-cell *matHeaderCellDef>Paciente</th>
       <td mat-cell *matCellDef="let preconsulta">
-        {{ preconsulta.nombreEnfermero }}
+        {{ preconsulta.ficha.nombrePaciente }}
       </td>
     </ng-container>
 
